@@ -12,11 +12,13 @@ var multer = require('multer');
 var flash = require('connect-flash');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var sass = require('node-sass');
 
 var db = mongoose.connection;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var members = require('./routes/members');
 
 var app = express();
 
@@ -31,6 +33,10 @@ try {
   console.log('Error on handling multer: ', e);
 }
 
+// sass
+//sass.render({
+//  file: './public/stylesheets/main.scss'
+//});
 
 
 // uncomment after placing your favicon in /public
@@ -72,6 +78,7 @@ app.use(expressValidator({
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/members', members);
 
 app.use(flash());
 app.use(function (req, res, next) {
